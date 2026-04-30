@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>安驰驾校 · 精英班别价格表</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
+            color: #1e2a3e;
+            padding: 2rem 1.5rem;
+            line-height: 1.4;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e6f3f, #2b8c5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero h1 i {
+            background: none;
+            color: #1e6f3f;
+            font-size: 2.2rem;
+        }
+        .hero .sub {
+            color: #4a5e75;
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+            border-bottom: 2px solid #cbdde9;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .badge-tag {
+            background: #eff6ff;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e6f3f;
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(2px);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .price-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(100, 116, 139, 0.12);
+        }
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 45px -15px rgba(0, 32, 64, 0.2);
+        }
+        .card-recommend {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #f59e0b;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+        .card-header {
+            padding: 1.8rem 1.5rem 1rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .plan-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0f2b3d;
+        }
+        .plan-name i {
+            font-size: 1.7rem;
+            color: #2b8c5e;
+        }
+        .price-area {
+            margin: 0.5rem 0 0.25rem;
+        }
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e6f3f;
+            letter-spacing: -1px;
+        }
+        .current-price small {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #5b6e8c;
+        }
+        .old-price {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-left: 8px;
+            font-weight: 500;
+        }
+        .price-note {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-top: 6px;
+        }
+        .features-list {
+            padding: 1.5rem 1.5rem 1.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #2c3e4e;
+            font-weight: 500;
+        }
+        .feature-item i {
+            width: 22px;
+            color: #2b8c5e;
+            font-size: 1rem;
+        }
+        .card-footer {
+            padding: 0rem 1.5rem 2rem;
+            margin-top: auto;
+        }
+        .btn-enroll {
+            background: #1e6f3f;
+            border: none;
+            width: 100%;
+            padding: 0.85rem 0;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            box-shadow: 0 4px 8px rgba(30, 111, 63, 0.2);
+        }
+        .btn-enroll:hover {
+            background: #135a35;
+            transform: scale(0.97);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6c86a3;
+        }
+        @media (max-width: 700px) {
+            body {
+                padding: 1.25rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .price-card {
+                border-radius: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>
+            <i class="fas fa-car-side"></i> 
+            安驰驾校·精英班别
+        </h1>
+        <div class="sub">专业教学 · 高通过率 · 一站拿证</div>
+        <div class="badge-tag">
+            <i class="fas fa-gem"></i> 限时优惠 | 三人团报立减300
+        </div>
+    </div>
+
+    <div class="pricing-grid">
+        <!-- 经济速成班 -->
+        <div class="price-card">
+            <div class="card-recommend" style="background:#3b82f6;">性价比之选</div>
+            <div class="card-header">
+                <div class="plan-name"><i class="fas fa-graduation-cap"></i><span>经济速成班</span></div>
+                <div class="price-area">
+                    <span class="current-price">¥2,980<small> 起</small></span>
+                    <span class="old-price">¥3,980</span>
+                </div>
+                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+            </div>
+            <div class="features-list">
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚗 30学时实操培训</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>📚 理论+模拟考试系统</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⏱️ 自主预约练车</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🔄 免费补考1次</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>👥 学员专属班车</span></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn-enroll" data-plan="经济速成班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+            </div>
+        </div>
+
+        <!-- 舒适标准班 (推荐) -->
+        <div class="price-card">
+            <div class="card-recommend"><i class="fas fa-thumbs-up"></i> 🔥 热销推荐</div>
+            <div class="card-header">
+                <div class="plan-name"><i class="fas fa-car"></i><span>舒适标准班</span></div>
+                <div class="price-area">
+                    <span class="current-price">¥3,980<small> 起</small></span>
+                    <span class="old-price">¥4,980</span>
+                </div>
+                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+            </div>
+            <div class="features-list">
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚘 40学时实操+空调练车</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>📅 周末/夜间自由选择</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎯 2次全真模拟考试</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎓 优先安排考试</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🛡️ 学车意外险</span></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn-enroll" data-plan="舒适标准班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+            </div>
+        </div>
+
+        <!-- 尊享VIP快班 -->
+        <div class="price-card">
+            <div class="card-recommend" style="background:#e67e22;">⚡ 快速拿证</div>
+            <div class="card-header">
+                <div class="plan-name"><i class="fas fa-crown"></i><span>尊享VIP快班</span></div>
+                <div class="price-area">
+                    <span class="current-price">¥5,980<small> 起</small></span>
+                    <span class="old-price">¥6,980</span>
+                </div>
+                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+            </div>
+            <div class="features-list">
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⭐ 一对一金牌教练</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⏰ 不限学时 · 随到随学</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🏁 考场真实模拟车</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🛡️ 补考保险全额赔付</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚀 45天极速拿证通道</span></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn-enroll" data-plan="尊享VIP快班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+            </div>
+        </div>
+
+        <!-- 钻石至尊班 -->
+        <div class="price-card">
+            <div class="card-recommend" style="background:#8e44ad;">🌟 极致服务</div>
+            <div class="card-header">
+                <div class="plan-name"><i class="fas fa-gem"></i><span>钻石至尊班</span></div>
+                <div class="price-area">
+                    <span class="current-price">¥8,880<small> 起</small></span>
+                </div>
+                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+            </div>
+            <div class="features-list">
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>👑 私人定制教学计划</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚙 专车上门接送</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>♾️ 无限次模拟考试</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎁 不过包赔·安心学</span></div>
+                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🍃 贵宾休息室+茶歇</span></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn-enroll" data-plan="钻石至尊班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-shield-alt"></i> 价格透明·无隐形消费 | 驾校直营保障权益
+    </footer>
+</div>
+
+<script>
+    // 简单的咨询按钮响应
+    const btns = document.querySelectorAll('.btn-enroll');
+    btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const planName = btn.getAttribute('data-plan') || '该班别';
+            alert(`✨ 感谢您关注 ${planName}！\n招生老师会尽快联系您，或致电 400-882-6688。`);
+        });
+    });
+</script>
+</body>
+</html>
