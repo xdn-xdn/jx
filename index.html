@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>启信驾校 · 精英班别价格表</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -74,7 +74,7 @@
         .price-card {
             background: #ffffff;
             border-radius: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
             transition: transform 0.25s ease, box-shadow 0.3s ease;
             overflow: hidden;
             display: flex;
@@ -96,9 +96,7 @@
             font-weight: 700;
             padding: 0.25rem 0.9rem;
             border-radius: 40px;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
             z-index: 2;
-            letter-spacing: 0.5px;
         }
         .card-header {
             padding: 1.8rem 1.5rem 1rem;
@@ -111,62 +109,25 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #0f2b3d;
         }
-        .plan-name i {
-            font-size: 1.7rem;
-            color: #2b8c5e;
-        }
-        .price-area {
-            margin: 0.5rem 0 0.25rem;
-        }
+        .plan-name i { color: #2b8c5e; }
         .current-price {
             font-size: 2.5rem;
             font-weight: 800;
             color: #1e6f3f;
-            letter-spacing: -1px;
         }
-        .current-price small {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #5b6e8c;
-        }
+        .current-price small { font-size: 1rem; color: #5b6e8c; }
         .old-price {
             font-size: 0.9rem;
             color: #94a3b8;
             text-decoration: line-through;
             margin-left: 8px;
-            font-weight: 500;
         }
-        .price-note {
-            font-size: 0.8rem;
-            color: #5b6e8c;
-            margin-top: 6px;
-        }
-        .features-list {
-            padding: 1.5rem 1.5rem 1.8rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.9rem;
-            color: #2c3e4e;
-            font-weight: 500;
-        }
-        .feature-item i {
-            width: 22px;
-            color: #2b8c5e;
-            font-size: 1rem;
-        }
-        .card-footer {
-            padding: 0rem 1.5rem 2rem;
-            margin-top: auto;
-        }
+        .price-note { font-size: 0.8rem; color: #5b6e8c; margin-top: 6px; }
+        .features-list { padding: 1.5rem 1.5rem 1.8rem; flex: 1; display: flex; flex-direction: column; gap: 0.85rem; }
+        .feature-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+        .feature-item i { width: 22px; color: #2b8c5e; }
+        .card-footer { padding: 0rem 1.5rem 2rem; }
         .btn-enroll {
             background: #1e6f3f;
             border: none;
@@ -179,156 +140,299 @@
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-enroll:hover { background: #135a35; transform: scale(0.97); }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #6c86a3; }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            position: relative;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-btn {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+        .modal h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e6f3f;
+        }
+        .qrcode-img {
+            width: 180px;
+            height: 180px;
+            margin: 0.5rem auto 1rem;
+            display: block;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            object-fit: contain;
+        }
+        .contact-info {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .contact-info p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-family: inherit;
-            box-shadow: 0 4px 8px rgba(30, 111, 63, 0.2);
+            flex-wrap: wrap;
         }
-        .btn-enroll:hover {
-            background: #135a35;
-            transform: scale(0.97);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
+        .copy-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            cursor: pointer;
             font-size: 0.75rem;
-            color: #6c86a3;
+            font-weight: 500;
         }
-        @media (max-width: 700px) {
-            body {
-                padding: 1.25rem;
-            }
-            .hero h1 {
-                font-size: 1.9rem;
-            }
-            .price-card {
-                border-radius: 1.5rem;
-            }
+        .copy-btn:hover { background: #cbd5e1; }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e6f3f;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            z-index: 1100;
+            white-space: nowrap;
+        }
+        @media (max-width: 550px) {
+            .modal-content { padding: 1.5rem; }
+            .qrcode-img { width: 140px; height: 140px; }
+            .contact-info p { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-        <h1>
-            <i class="fas fa-car-side"></i> 
-            启信驾校·精英班别
-        </h1>
+        <h1><i class="fas fa-car-side"></i> 启信驾校·精英班别</h1>
         <div class="sub">专业教学 · 高通过率 · 一站拿证</div>
-        <div class="badge-tag">
-            <i class="fas fa-gem"></i> 限时优惠 | 三人团报立减300
+        <div class="badge-tag"><i class="fas fa-gem"></i> 限时优惠 | 三人团报立减300</div>
+    </div>
+    <div class="pricing-grid" id="pricingGrid"></div>
+    <footer><i class="fas fa-shield-alt"></i> 价格透明·无隐形消费 | 驾校直营保障权益</footer>
+</div>
+
+<!-- 二维码弹窗 -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3><i class="fab fa-weixin"></i> 扫码添加微信</h3>
+        <!-- 微信二维码图片 - 请替换为您自己的真实二维码图片地址 -->
+        <img id="wechatQr" class="qrcode-img" src="wechat_qr.jpg" alt="微信二维码">
+        <div class="contact-info">
+            <p><i class="fab fa-weixin"></i> 微信号：<strong id="wechatId">13662791355</strong> 
+                <button class="copy-btn" data-target="wechatId">一键复制</button>
+            </p>
+            <p><i class="fas fa-phone-alt"></i> 咨询电话：<strong id="phoneNum">13662791355</strong> 
+                <button class="copy-btn" data-target="phoneNum">一键复制</button>
+            </p>
+            <p style="font-size:0.75rem; color:#4a627a;">👆 点击按钮一键复制，或长按号码手动复制</p>
         </div>
     </div>
-
-    <div class="pricing-grid">
-        <!-- 经济速成班 -->
-        <div class="price-card">
-            <div class="card-recommend" style="background:#3b82f6;">性价比之选</div>
-            <div class="card-header">
-                <div class="plan-name"><i class="fas fa-graduation-cap"></i><span>经济速成班</span></div>
-                <div class="price-area">
-                    <span class="current-price">¥2,980<small> 起</small></span>
-                    <span class="old-price">¥3,980</span>
-                </div>
-                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
-            </div>
-            <div class="features-list">
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚗 30学时实操培训</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>📚 理论+模拟考试系统</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⏱️ 自主预约练车</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🔄 免费补考1次</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>👥 学员专属班车</span></div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-enroll" data-plan="经济速成班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
-            </div>
-        </div>
-
-        <!-- 舒适标准班 (推荐) -->
-        <div class="price-card">
-            <div class="card-recommend"><i class="fas fa-thumbs-up"></i> 🔥 热销推荐</div>
-            <div class="card-header">
-                <div class="plan-name"><i class="fas fa-car"></i><span>舒适标准班</span></div>
-                <div class="price-area">
-                    <span class="current-price">¥3,980<small> 起</small></span>
-                    <span class="old-price">¥4,980</span>
-                </div>
-                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
-            </div>
-            <div class="features-list">
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚘 40学时实操+空调练车</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>📅 周末/夜间自由选择</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎯 2次全真模拟考试</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎓 优先安排考试</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🛡️ 学车意外险</span></div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-enroll" data-plan="舒适标准班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
-            </div>
-        </div>
-
-        <!-- 尊享VIP快班 -->
-        <div class="price-card">
-            <div class="card-recommend" style="background:#e67e22;">⚡ 快速拿证</div>
-            <div class="card-header">
-                <div class="plan-name"><i class="fas fa-crown"></i><span>尊享VIP快班</span></div>
-                <div class="price-area">
-                    <span class="current-price">¥5,980<small> 起</small></span>
-                    <span class="old-price">¥6,980</span>
-                </div>
-                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
-            </div>
-            <div class="features-list">
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⭐ 一对一金牌教练</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>⏰ 不限学时 · 随到随学</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🏁 考场真实模拟车</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🛡️ 补考保险全额赔付</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚀 45天极速拿证通道</span></div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-enroll" data-plan="尊享VIP快班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
-            </div>
-        </div>
-
-        <!-- 钻石至尊班 -->
-        <div class="price-card">
-            <div class="card-recommend" style="background:#8e44ad;">🌟 极致服务</div>
-            <div class="card-header">
-                <div class="plan-name"><i class="fas fa-gem"></i><span>钻石至尊班</span></div>
-                <div class="price-area">
-                    <span class="current-price">¥8,880<small> 起</small></span>
-                </div>
-                <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
-            </div>
-            <div class="features-list">
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>👑 私人定制教学计划</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🚙 专车上门接送</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>♾️ 无限次模拟考试</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🎁 不过包赔·安心学</span></div>
-                <div class="feature-item"><i class="fas fa-check-circle"></i><span>🍃 贵宾休息室+茶歇</span></div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-enroll" data-plan="钻石至尊班"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <i class="fas fa-shield-alt"></i> 价格透明·无隐形消费 | 驾校直营保障权益
-    </footer>
 </div>
 
 <script>
-    // 简单的咨询按钮响应
-    const btns = document.querySelectorAll('.btn-enroll');
-    btns.forEach(btn => {
+    // ================= 驾校联系方式配置（请修改为真实信息） =================
+    const WECHAT_ID = "13662791355";          // 您的微信号
+    const PHONE_NUMBER = "13662791355";        // 您的联系电话
+    // 微信二维码图片地址（请替换为真实的图片URL，可以是上传到GitHub仓库的相对路径，如 "wechat_qrcode.jpg"）
+    const QRCODE_IMAGE_URL = "wechat_qr.jpg";
+
+    // 设置页面显示的联系方式
+    document.getElementById('wechatId').innerText = WECHAT_ID;
+    document.getElementById('phoneNum').innerText = PHONE_NUMBER;
+    document.getElementById('wechatQr').src = QRCODE_IMAGE_URL;
+
+    // 模态框控制
+    const modal = document.getElementById('contactModal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    function openModal() {
+        modal.style.display = 'flex';
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // ---------- 一键复制（兼容微信） ----------
+    function showToast(msg) {
+        let toast = document.querySelector('.toast-msg');
+        if (toast) toast.remove();
+        let div = document.createElement('div');
+        div.className = 'toast-msg';
+        div.innerText = msg;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 2000);
+    }
+
+    function copyText(text, buttonElement) {
+        // 优先尝试 Clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`✅ 已复制：${text}`);
+                if (buttonElement) {
+                    const originalText = buttonElement.innerText;
+                    buttonElement.innerText = '已复制';
+                    setTimeout(() => { buttonElement.innerText = originalText; }, 1500);
+                }
+            }).catch(() => fallbackCopy(text, buttonElement));
+        } else {
+            fallbackCopy(text, buttonElement);
+        }
+    }
+
+    function fallbackCopy(text, buttonElement) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            const success = document.execCommand('copy');
+            if (success) {
+                showToast(`✅ 已复制：${text}`);
+                if (buttonElement) {
+                    const originalText = buttonElement.innerText;
+                    buttonElement.innerText = '已复制';
+                    setTimeout(() => { buttonElement.innerText = originalText; }, 1500);
+                }
+            } else {
+                showToast('❌ 复制失败，请长按手动复制');
+            }
+        } catch (err) {
+            showToast('❌ 复制失败');
+        }
+        document.body.removeChild(textarea);
+    }
+
+    // 绑定一键复制按钮
+    document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const planName = btn.getAttribute('data-plan') || '该班别';
-            alert(`✨ 感谢您关注 ${planName}！\n致电 136-6279-1355。`);
+            e.preventDefault();
+            const targetId = btn.getAttribute('data-target');
+            const textElement = document.getElementById(targetId);
+            if (textElement) {
+                const textToCopy = textElement.innerText;
+                copyText(textToCopy, btn);
+            } else {
+                showToast('❌ 未找到复制内容');
+            }
         });
     });
+
+    // ---------- 价格卡片数据 ----------
+    const plans = [
+        {
+            name: "经济速成班",
+            price: 2980,
+            original: 3980,
+            badge: "性价比之选",
+            badgeColor: "#3b82f6",
+            features: ["🚗 30学时实操培训", "📚 理论+模拟考试系统", "⏱️ 自主预约练车", "🔄 免费补考1次", "👥 学员专属班车"]
+        },
+        {
+            name: "舒适标准班",
+            price: 3980,
+            original: 4980,
+            badge: "🔥 热销推荐",
+            badgeColor: "#f59e0b",
+            features: ["🚘 40学时实操+空调练车", "📅 周末/夜间自由选择", "🎯 2次全真模拟考试", "🎓 优先安排考试", "🛡️ 学车意外险"]
+        },
+        {
+            name: "尊享VIP快班",
+            price: 5980,
+            original: 6980,
+            badge: "⚡ 快速拿证",
+            badgeColor: "#e67e22",
+            features: ["⭐ 一对一金牌教练", "⏰ 不限学时 · 随到随学", "🏁 考场真实模拟车", "🛡️ 补考保险全额赔付", "🚀 45天极速拿证通道"]
+        },
+        {
+            name: "钻石至尊班",
+            price: 8880,
+            original: null,
+            badge: "🌟 极致服务",
+            badgeColor: "#8e44ad",
+            features: ["👑 私人定制教学计划", "🚙 专车上门接送", "♾️ 无限次模拟考试", "🎁 不过包赔·安心学", "🍃 贵宾休息室+茶歇"]
+        }
+    ];
+
+    const gridContainer = document.getElementById('pricingGrid');
+    function renderCards() {
+        let html = '';
+        plans.forEach(plan => {
+            html += `
+                <div class="price-card">
+                    <div class="card-recommend" style="background:${plan.badgeColor};">${plan.badge}</div>
+                    <div class="card-header">
+                        <div class="plan-name"><i class="fas fa-graduation-cap"></i><span>${plan.name}</span></div>
+                        <div class="price-area">
+                            <span class="current-price">¥${plan.price.toLocaleString()}<small> 起</small></span>
+                            ${plan.original ? `<span class="old-price">¥${plan.original.toLocaleString()}</span>` : ''}
+                        </div>
+                        <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+                    </div>
+                    <div class="features-list">
+                        ${plan.features.map(f => `<div class="feature-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-enroll" data-plan="${plan.name}"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+                    </div>
+                </div>
+            `;
+        });
+        gridContainer.innerHTML = html;
+        // 绑定所有“立即咨询”按钮打开模态框
+        document.querySelectorAll('.btn-enroll').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+    }
+    renderCards();
 </script>
 </body>
 </html>
