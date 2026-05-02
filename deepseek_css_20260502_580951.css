@@ -1,0 +1,231 @@
+/* ========== 公共样式（所有驾校页面共享） ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
+    color: #1e2a3e;
+    padding: 2rem 1.5rem;
+    line-height: 1.4;
+    min-height: 100vh;
+}
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1e6f3f, #2b8c5e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+.hero h1 i {
+    background: none;
+    color: #1e6f3f;
+    font-size: 2.2rem;
+}
+.hero .sub {
+    color: #4a5e75;
+    font-size: 1.1rem;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    border-bottom: 2px solid #cbdde9;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+.badge-tag {
+    background: #eff6ff;
+    border-radius: 40px;
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1e6f3f;
+    display: inline-block;
+    margin-top: 1rem;
+    backdrop-filter: blur(2px);
+}
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.price-card {
+    background: #ffffff;
+    border-radius: 2rem;
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(100, 116, 139, 0.12);
+}
+.price-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 45px -15px rgba(0, 32, 64, 0.2);
+}
+.card-recommend {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: #f59e0b;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.9rem;
+    border-radius: 40px;
+    z-index: 2;
+}
+.card-header {
+    padding: 1.8rem 1.5rem 1rem;
+    border-bottom: 1px solid #edf2f7;
+}
+.plan-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.plan-name i { color: #2b8c5e; }
+.current-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1e6f3f;
+}
+.current-price small { font-size: 1rem; color: #5b6e8c; }
+.old-price {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+    margin-left: 8px;
+}
+.price-note { font-size: 0.8rem; color: #5b6e8c; margin-top: 6px; }
+.features-list { padding: 1.5rem 1.5rem 1.8rem; flex: 1; display: flex; flex-direction: column; gap: 0.85rem; }
+.feature-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+.feature-item i { width: 22px; color: #2b8c5e; }
+.card-footer { padding: 0rem 1.5rem 2rem; }
+.btn-enroll {
+    background: #1e6f3f;
+    border: none;
+    width: 100%;
+    padding: 0.85rem 0;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.btn-enroll:hover { background: #135a35; transform: scale(0.97); }
+footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #6c86a3; }
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 2rem;
+    padding: 2rem 1.8rem;
+    position: relative;
+    box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s;
+    text-align: center;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+.close-btn {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #94a3b8;
+}
+.modal h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e6f3f;
+}
+.qrcode-img {
+    width: 180px;
+    height: 180px;
+    margin: 0.5rem auto 1rem;
+    display: block;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    object-fit: contain;
+}
+.contact-info {
+    background: #f1f5f9;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    margin: 1rem 0 0.5rem;
+}
+.contact-info p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.copy-btn {
+    background: #e2e8f0;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.copy-btn:hover { background: #cbd5e1; }
+.toast-msg {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e6f3f;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    z-index: 1100;
+    white-space: nowrap;
+}
+@media (max-width: 550px) {
+    .modal-content { padding: 1.5rem; }
+    .qrcode-img { width: 140px; height: 140px; }
+    .contact-info p { flex-direction: column; gap: 5px; }
+}
