@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>茶山驾校 · 精英班别价格表</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f4f9ff 0%, #e9f0fa 100%);
+            color: #1e2a3e;
+            padding: 2rem 1.5rem;
+            line-height: 1.4;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e6f3f, #2b8c5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero h1 i {
+            background: none;
+            color: #1e6f3f;
+            font-size: 2.2rem;
+        }
+        .hero .sub {
+            color: #4a5e75;
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+            border-bottom: 2px solid #cbdde9;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .badge-tag {
+            background: #eff6ff;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e6f3f;
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(2px);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .price-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(100, 116, 139, 0.12);
+        }
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 45px -15px rgba(0, 32, 64, 0.2);
+        }
+        .card-recommend {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #f59e0b;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            z-index: 2;
+        }
+        .card-header {
+            padding: 1.8rem 1.5rem 1rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .plan-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .plan-name i { color: #2b8c5e; }
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e6f3f;
+        }
+        .current-price small { font-size: 1rem; color: #5b6e8c; }
+        .old-price {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        .price-note { font-size: 0.8rem; color: #5b6e8c; margin-top: 6px; }
+        .features-list { padding: 1.5rem 1.5rem 1.8rem; flex: 1; display: flex; flex-direction: column; gap: 0.85rem; }
+        .feature-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+        .feature-item i { width: 22px; color: #2b8c5e; }
+        .card-footer { padding: 0rem 1.5rem 2rem; }
+        .btn-enroll {
+            background: #1e6f3f;
+            border: none;
+            width: 100%;
+            padding: 0.85rem 0;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-enroll:hover { background: #135a35; transform: scale(0.97); }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #6c86a3; }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            position: relative;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-btn {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+        .modal h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e6f3f;
+        }
+        .qrcode-img {
+            width: 180px;
+            height: 180px;
+            margin: 0.5rem auto 1rem;
+            display: block;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            object-fit: contain;
+        }
+        .contact-info {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .contact-info p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .copy-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .copy-btn:hover { background: #cbd5e1; }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e6f3f;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            z-index: 1100;
+            white-space: nowrap;
+        }
+        @media (max-width: 550px) {
+            .modal-content { padding: 1.5rem; }
+            .qrcode-img { width: 140px; height: 140px; }
+            .contact-info p { flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-car-side"></i> 茶山驾校·精英班别</h1>
+        <div class="sub">专业教学 · 高通过率 · 一站拿证</div>
+        <div class="badge-tag"><i class="fas fa-gem"></i> 限时优惠 | 三人团报立减300</div>
+    </div>
+    <div class="pricing-grid" id="pricingGrid"></div>
+    <footer><i class="fas fa-shield-alt"></i> 价格透明·无隐形消费 | 驾校直营保障权益</footer>
+</div>
+
+<!-- 二维码弹窗 -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3><i class="fab fa-weixin"></i> 扫码添加微信</h3>
+        <!-- 微信二维码图片 - 请替换为您自己的真实二维码图片地址 -->
+        <img id="wechatQr" class="qrcode-img" src="wechat_qr.jpg" alt="微信二维码">
+        <div class="contact-info">
+            <p><i class="fab fa-weixin"></i> 微信号：<strong id="wechatId">13662791355</strong> 
+                <button class="copy-btn" data-target="wechatId">一键复制</button>
+            </p>
+            <p><i class="fas fa-phone-alt"></i> 咨询电话：<strong id="phoneNum">13662791355</strong> 
+                <button class="copy-btn" data-target="phoneNum">一键复制</button>
+            </p>
+            <p style="font-size:0.75rem; color:#4a627a;">👆 点击按钮一键复制，或长按号码手动复制</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ================= 驾校联系方式配置（如需修改请改这里） =================
+    const WECHAT_ID = "13662791355";          // 微信号
+    const PHONE_NUMBER = "13662791355";        // 联系电话
+    const QRCODE_IMAGE_URL = "wechat_qr.jpg";  // 二维码图片文件名
+
+    document.getElementById('wechatId').innerText = WECHAT_ID;
+    document.getElementById('phoneNum').innerText = PHONE_NUMBER;
+    document.getElementById('wechatQr').src = QRCODE_IMAGE_URL;
+
+    // 模态框控制
+    const modal = document.getElementById('contactModal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    function openModal() {
+        modal.style.display = 'flex';
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // 一键复制
+    function showToast(msg) {
+        let toast = document.querySelector('.toast-msg');
+        if (toast) toast.remove();
+        let div = document.createElement('div');
+        div.className = 'toast-msg';
+        div.innerText = msg;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 2000);
+    }
+
+    function copyText(text, buttonElement) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`✅ 已复制：${text}`);
+                if (buttonElement) {
+                    const originalText = buttonElement.innerText;
+                    buttonElement.innerText = '已复制';
+                    setTimeout(() => { buttonElement.innerText = originalText; }, 1500);
+                }
+            }).catch(() => fallbackCopy(text, buttonElement));
+        } else {
+            fallbackCopy(text, buttonElement);
+        }
+    }
+
+    function fallbackCopy(text, buttonElement) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            const success = document.execCommand('copy');
+            if (success) {
+                showToast(`✅ 已复制：${text}`);
+                if (buttonElement) {
+                    const originalText = buttonElement.innerText;
+                    buttonElement.innerText = '已复制';
+                    setTimeout(() => { buttonElement.innerText = originalText; }, 1500);
+                }
+            } else {
+                showToast('❌ 复制失败，请长按手动复制');
+            }
+        } catch (err) {
+            showToast('❌ 复制失败');
+        }
+        document.body.removeChild(textarea);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = btn.getAttribute('data-target');
+            const textElement = document.getElementById(targetId);
+            if (textElement) {
+                const textToCopy = textElement.innerText;
+                copyText(textToCopy, btn);
+            } else {
+                showToast('❌ 未找到复制内容');
+            }
+        });
+    });
+
+    // 价格卡片数据（保持不变）
+    const plans = [
+        {
+            name: "经济速成班",
+            price: 2980,
+            original: 3980,
+            badge: "性价比之选",
+            badgeColor: "#3b82f6",
+            features: ["🚗 30学时实操培训", "📚 理论+模拟考试系统", "⏱️ 自主预约练车", "🔄 免费补考1次", "👥 学员专属班车"]
+        },
+        {
+            name: "舒适标准班",
+            price: 3980,
+            original: 4980,
+            badge: "🔥 热销推荐",
+            badgeColor: "#f59e0b",
+            features: ["🚘 40学时实操+空调练车", "📅 周末/夜间自由选择", "🎯 2次全真模拟考试", "🎓 优先安排考试", "🛡️ 学车意外险"]
+        },
+        {
+            name: "尊享VIP快班",
+            price: 5980,
+            original: 6980,
+            badge: "⚡ 快速拿证",
+            badgeColor: "#e67e22",
+            features: ["⭐ 一对一金牌教练", "⏰ 不限学时 · 随到随学", "🏁 考场真实模拟车", "🛡️ 补考保险全额赔付", "🚀 45天极速拿证通道"]
+        },
+        {
+            name: "钻石至尊班",
+            price: 8880,
+            original: null,
+            badge: "🌟 极致服务",
+            badgeColor: "#8e44ad",
+            features: ["👑 私人定制教学计划", "🚙 专车上门接送", "♾️ 无限次模拟考试", "🎁 不过包赔·安心学", "🍃 贵宾休息室+茶歇"]
+        }
+    ];
+
+    const gridContainer = document.getElementById('pricingGrid');
+    function renderCards() {
+        let html = '';
+        plans.forEach(plan => {
+            html += `
+                <div class="price-card">
+                    <div class="card-recommend" style="background:${plan.badgeColor};">${plan.badge}</div>
+                    <div class="card-header">
+                        <div class="plan-name"><i class="fas fa-graduation-cap"></i><span>${plan.name}</span></div>
+                        <div class="price-area">
+                            <span class="current-price">¥${plan.price.toLocaleString()}<small> 起</small></span>
+                            ${plan.original ? `<span class="old-price">¥${plan.original.toLocaleString()}</span>` : ''}
+                        </div>
+                        <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+                    </div>
+                    <div class="features-list">
+                        ${plan.features.map(f => `<div class="feature-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-enroll" data-plan="${plan.name}"><i class="fas fa-phone-alt"></i> 立即咨询占位</button>
+                    </div>
+                </div>
+            `;
+        });
+        gridContainer.innerHTML = html;
+        document.querySelectorAll('.btn-enroll').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+    }
+    renderCards();
+</script>
+</body>
+</html>
