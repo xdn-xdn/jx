@@ -105,7 +105,7 @@
     const plans = [
         {
             name: "经济速成班",
-            price: 2980,
+            price: 3180,
             original: 3980,
             badge: "性价比之选",
             badgeColor: "#3b82f6",
@@ -150,7 +150,7 @@
                             <span class="current-price">¥${plan.price.toLocaleString()}<small> 起</small></span>
                             ${plan.original ? `<span class="old-price">¥${plan.original.toLocaleString()}</span>` : ''}
                         </div>
-                        <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训+考试）</div>
+                        <div class="price-note"><i class="fas fa-receipt"></i> 一费制全包（报名+培训）</div>
                     </div>
                     <div class="features-list">
                         ${plan.features.map(f => `<div class="feature-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('')}
